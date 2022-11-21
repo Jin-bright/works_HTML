@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="">
+        <fieldset> 
+            <legend> 납품자 정보</legend>
+            <ol>
+                
+            <li>
+                <div>
+                    <label for="name-supplier"> 납품자명(필수) : </label>
+                    <input type="text" name="name-supplier" id="SuppName">  
+                </div></li><br>
+            <li>    
+                <div>
+                    <label for="email-supplier"> email(필수) : </label>
+                    <input type="email"  name="email" id="email-supplier" placeholder="answer@naver.com" >  
+                </div></li><br>
+
+            <li>
+                <div>
+                <label for="homepage-supplier"> 홈페이지 : </label>
+                <input type="url" name="homepage" id="homepage-supplier" value="http://" >
+                </div></li><br>
+
+            <li>
+                <div>
+                    <label for="region-supplier"> 지역 : </label>
+                    <select name="region" id="region-supplier"> 
+                        <optgroup label="한국" >
+                            <option value="서울"> 서울 </option>
+                            <option value="부산" selected> 부산 </option>
+                        </optgroup>    
+
+                        <optgroup label="중국">
+                            <option value="북경"> 북경 </option>
+                            <option value="상해"> 상해 </option>
+                        </optgroup>
+                    </select>
+                </div></li>
+            </ol>
+        </fieldset>
+
+        <fieldset>
+            <legend> 납품정보  </legend>
+            <ul>
+                <li>
+                    <div>
+                        <label for="name-product"> 상품명(필수) : </label>
+                        <input type="text" name = "productname" id="name-product" >
+                    </div></li><br>
+                <li>
+                    <div>
+                        <label for="quantity"> 납품수량(필수) : </label>
+                        <input type="number" name="quantity" id="quantity" placeholder="최소 100">
+                    </div></li><br>
+
+                <li>
+                    <div>
+                        <label for="grade"> 납품등급(필수) : </label>
+                        <input type ="range"  name="grade" id="grade" value="50"  >
+                    </div></li><br>    
+                <li>
+                    <div>
+                        <label for="ect"> 기타사항 : </label>
+                        <textarea name="ectra" id="ect" cols="30" rows="2"></textarea>
+                    </div></li>
+            </ul>
+                    
+        </fieldset><br>
+            <button> send message</button>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="">
+        <div>
+            <label for="name"> 고객명 : </label>
+            <input type="text" name="customer-name" id="name" ><br><br>
+
+            <label for="phone"> 전화번호(필수) : </label>
+            <input type="text" name="customer-phone" id="phone"> <br><br>
+            
+            <label for="email">E-mail : </label>
+            <input type="url" name="email" id="email"><br><br>
+
+            <label for="selectpizza"> 피자선택(필수) : </label> 
+            <select name="selectpizza" id="selectpizza" >
+            <option value=""  > 피자를 선택하세요 </option>
+            </select> 
+        </div><br>
+
+        
+            
+        <fieldset>
+            <legend>피자 사이즈(필수)</legend>
+                <label for="Smailsize">Small</label>
+                <input type="radio" name="size" id="Smailsize" style="float:left; "><br><br>
+
+                <label for="Mediumsize">Medium</label>
+                <input type="radio" name="size" id="Mediumsize" style="float:left;"><br><br>
+
+                <label for="Largesize">Large</label>
+                <input type="radio" name="size" id="Largesize" style="float:left;">
+        </fieldset>
+        
+        <fieldset >
+            <legend> 토핑 선택</legend>
+                <label for="bacon">베이컨</label>
+                <input type="checkbox" name="toppiong" id="bacon" style= "float:left;" ><br><br>
+                <label for="cheese">치즈</label>
+                <input type="checkbox" name="toppiong" id="cheese" style="float:left;"><br><br>
+                <label for="onion">양파</label>
+                <input type="checkbox" name="toppiong" id="onion" style="float:left;"><br><br>
+                <label for="mushroom">버섯</label>
+                <input type="checkbox" name="toppiong" id="mushroom" style="float:left;"><br><br>
+        </fieldset><br>
+
+        <div>
+            <label for="deliverytime">희망 배송 시간 :</label> 
+            <input type ="time" name="deliverytime" id="deliverytime"><br><br>
+        </div>
+        
+        <div>
+            <label for="requests">배송 시 요청사항 : </label>
+            <textarea name="requests" id="requests" cols="20" rows="3"></textarea>    
+        </div>
+    </form>
+    
+</body>
+</html>
