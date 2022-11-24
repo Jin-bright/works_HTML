@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+ <head>
+  <meta charset="UTF-8">
+  <title>폴라로이드 느낌 사진만들기</title>
+
+<style>
+
+ .polaroid{
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.519);
+    box-shadow: 3px 2px 3px 1px lightgray;
+    width: 350px;
+    height: 250px;
+
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 80px;
+
+    padding-top: 20px;
+    overflow: hidden;
+ }
+
+ div>img{
+    opacity: 0.7;
+ }
+
+ div>p {
+    transform: translate(240px,0);
+    opacity: 0.5;
+ }
+ 
+
+ /*----- 호버시 ---*/ 
+
+ .rotate:hover{
+    transform:rotate(8deg);
+    background-color: rgba(220, 220, 220, 0.629);
+    transition-duration: 1s;
+ }
+
+ .rotate:hover img{
+    opacity: 0.9;
+ }
+
+ .rotate:hover .caption{  
+    transform: translate(-70px,0);
+    transition-duration: 1s;
+    opacity: 1;
+ }
+
+
+</style>
+</head>
+ <body>
+  <h2>폴라로이드 느낌의 사진 만들기</h2>
+  <hr>
+  <div class="polaroid rotate">
+    <img src="../sample/image/river1.PNG" width="300" height="180"> 
+    <p class="caption">여름이깊어가고있었다</p>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+ </body>
+</html>

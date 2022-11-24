@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS3 Transition</title> 
+
+    <style>
+
+
+    #container{ /*div*/
+        width: 800px;
+        height: 200px;
+        overflow: hidden; 
+        background-color: white;
+        margin-top: 20px;
+    }
+
+    .prod-list{  /*ul*/
+        padding: 0;
+        list-style: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: flex;
+    }
+
+    li{
+        display: inline;
+        height: 400px;
+        float: left;
+        padding-top: 0;
+        padding-left: 20px;
+    }
+
+    img, .caption{
+        margin-top: 0;
+        width: 240px;
+        height: 200px;
+    }
+
+     
+    .caption { /* 글 있는 div */
+        background-color: black;
+        text-align: center;
+        color: white;
+        
+        transform: translate(0,0);
+        transition-duration: 1s;
+    }
+
+
+    h1{ margin: 0;}
+
+    p{ padding-top: 10px; }
+
+    .caption h1{  padding-top: 30px; }
+
+   
+    img:hover + .caption {
+        transform: translate(0,-204px);
+        opacity: 0.7;
+    }
+
+/* 4px어디서 생기는거지 ????? 
+-해결방법     
+body{ font-size: 0px; } <- 이건 너무 무식한방법인듯   */
+
+
+    </style>
+
+</head>
+<body>
+  <h1>신상품 목록</h1>
+	<div id="container">
+	  <ul class="prod-list">
+        <li>
+         <img src="../sample/test/prod/prod_color_eggs.jpg">
+        <div class="caption" >
+          <h1>칼라달걀</h1>
+          <p>신선한 무항생제 달걀</p>
+          <p>가격 : 12,345원</p>
+        </div>
+        </li>
+        
+        <li> 
+        <img src="../sample/test/prod/prod_potatoes.jpg">
+        <div class="caption">
+          <h1>감자</h1>
+          <p>css의 감을 잡자</p>
+          <p>가격 : 12,345원</p>
+        </div>
+        </li>
+ 
+        <li>
+        <img src="../sample/test/prod/prod_tomato.jpg">
+        <div class="caption">
+          <h1>방토</h1>
+          <p>건강식품의 끝판왕</p>
+          <p>가격 : 12,345원</p>
+        </div>
+        </li>
+      </ul>
+	</div>
+</body>
+</html>
