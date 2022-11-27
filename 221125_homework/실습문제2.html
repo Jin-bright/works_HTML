@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실습문제2</title>
+<style>
+	#result {
+		background:yellowgreen;
+		border:1px solid black;
+		height:200px;
+	}
+	#productAmount {
+		width:100px;
+	}
+</style>
+</head>
+<body>
+	<h2>실습문제2</h2>
+	<form method="get" action="">
+		<fieldset>
+			<legend>납품정보</legend>
+			<ul>
+				<li>
+					<label for="goodirum">상품명 : </label> 
+					<input type="text" id="productName" list="goodlist" required>
+					<datalist id="goodlist">
+						<option value="dog1004">도그1004</option>
+						<option value="catchicken">고양이치킨</option>
+						<option value="milk">우유</option>
+					</datalist>
+				</li>
+				<br>
+				<li>
+					<label for="productAmount">납품수량 : </label> 
+					<input type="number" id="productAmount" min="10" max="100" step="10" placeholder="최소10이상">
+				</li>
+				<br>
+				<li>
+					<label for="productLevel">납품등급 : </label> 
+					<input type="range" id="productLevel" min="0" max="10" step="2" onchange="showVal();" >&nbsp;
+					<span id="pVal"></span>
+				</li>
+				<br>
+				<li>
+					<label for="message">기타사항 : </label>
+					<textarea id="message" rows="5" cols="30"></textarea>
+				</li>
+			</ul>
+		</fieldset>
+		<br>
+		<input type="button" value="send message" onclick="printProduct();">
+	</form>
+	<div id="result"></div>
+
+    <script>
+
+        function showVal(){ // 납품등급 
+            const level = document.getElementById('productLevel').value ;
+            document.getElementById('pVal').innerHTML = level;
+        }
+
+        function printProduct(){ // 최종 div창에 출력 
+
+            const dtlist = document.querySelectorAll('#goodlist option');
+            const pname = document.getElementById('productName');
+            console.log ('pname : ' +  pname.value  );
+            
+            let pname1;
+            let pname2;
+
+             for(let i=0; i < dtlist.length; i++) {
+                 if(  pname.value == dtlist[i].value  ){
+                    console.log ( "dtlist[i]value " + dtlist[i].value);
+                    pname1 = dtlist[i].textContent;
+                 }
+                 else{
+                    // 'nothing';  
+                    pname2= pname.value;
+                 }
+             }
+
+            const level = document.getElementById('productLevel').value ; //2. 상품등급
+            const amount = document.getElementById('productAmount').value;//3.납품수량
+            const msg = document.getElementById('message').value; // 4.기타사항 
+
+            const finalmsg = confirm('해당 값을 출력하겠습니까?');
+            //const resultbox =  document.getElementById('result').innerHTML;  // 이거를 const에 담을수는없나 ? 이거는 안되는거같음 
+            const resultbox =  document.getElementById('result'); // div#result  
+
+            if(finalmsg ){
+
+//console.log(`상품명 : 여기는 백틱되는데 왜 밑에는 안될까 ? 
+// 납품등급 : ${level}
+// 납품수량 : ${amount}
+// 기타사항 : ${msg}`);
+               
+                document.getElementById('result').innerHTML = "상품명 : "+( pname1!=null ? pname1 : pname2)+"<br>납품등급 : "+level+"<br>납품수량 : "+amount+"<br>기타사항 : "+msg;
+                // null 이랑 "" 차이 
+            }
+            else{
+                return;
+            }
+
+        }
+    </script>
+</body>
+</html>

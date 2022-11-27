@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실습문제 1</title>
+<style type="text/css">
+#area {
+	width: 400px;
+	height: 150px;
+	background: #ffff99;
+	border: 1px solid #6666ff;
+}
+</style>
+</head>
+<body>
+	<h2>@실습문제 1</h2>
+	<form name="purchaseFrm">
+		<label>구매자 : </label>
+		<input type="text" placeholder="구매자의 이름을 입력하세요.">
+		<br>
+		<br>
+		<label>상품명 : </label>
+		<input type="text" id="pname" placeholder="구매 상품명을 입력하세요">
+		<br>
+		<br>
+		<label>가격 : </label>
+		<input type="text" name="price" placeholder="구매 가격을 입력하세요.">만원
+	</form>
+	<br>
+	<br>
+	<button onclick="printValue();">입력값 출력하기</button>
+	<br>
+	<br>
+	<div id="area"></div>
+
+    <script>
+
+        function printValue(){
+            
+            const area = document.getElementById('area');
+
+            let buyer = document.querySelector( 'form>input' ).value
+            let pname = document.getElementById('pname').value  ; 
+            let price = document.getElementsByName('price')[0].value;
+            
+            area.innerHTML = '구입자 : ' + buyer+ '님'+'<br>' +'구입상품 : '+pname + '<br>' + '구매가격 : '+ price +'만원'  ;
+            
+        }
+    </script>
+</body>
+</html>
