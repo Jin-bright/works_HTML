@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset> 다시하기 - 1202 처음 푼 문제 <br>
+        <legend> 사용자입력값을 누적하는 가산기 </legend>
+        <input type="number" id="usernum"> 
+        <button onclick="test5()"> 더하기 </button>
+        <span id="userSum">0</span> <br>
+        <button onclick="resetSum();"> 초기화 </button><br>
+        
+    </fieldset>
+    
+    <script>
+
+       
+
+        const makeAdder = () => {
+                let sum = 0;
+    
+                return [
+                     () => {        // return에서 함수를 반환하는 느낌 
+                            const number = document.getElementById('usernum').value;
+                            const rsum =  (sum += parseInt( number ))
+                            userSum.innerHTML = (rsum )
+                            console.log ( rsum);
+                            usernum.select(); // input 태그에 포커싱 
+                        },
+                    () => {
+                      //  userSum.innerHTML = parseInt( 0 ); // 이런식으로 하면 작동안함 
+
+                            sum = 0; // 전역변수에 접근한다는건가 이게 ?
+                            userSum.innerHTML = sum;
+                    }
+                ];//return을 배열로 만들었다 
+        }
+
+
+        const funcs = makeAdder();
+        const test5 = funcs[0];
+        const resetSum = funcs[1];
+    </script>
+
+<h1> 객체 </h1>
+<button onclick="test1()"> 객체생성 1 </button>
+<script>
+const test1 = () => {
+
+    const obj = {
+        id : "honggd",
+        name : "홍길동",
+        age : 33,
+        married : false, 
+        hobby : ['축구', '농구', '야구'],
+        pet: {
+            name : '구리구리',
+            breed : '푸들'
+        },
+        'phone num' : '0123412323',
+        123 : 457
+    };
+
+    console.log ( "구리구리 꺼내기 : " +  obj['pet'].name)
+    console.log ( "구리구리 꺼내기 : " +  obj['pet.name']) // 불가 
+    console.log ( "구리구리 꺼내기 : " +  obj.pet['name']) // 가능
+    
+
+}
+</script>
+<br><br><br><br><br>
+
+<h2> toStinrg </h2>
+<button onclick="test55()"> toString</button>
+
+<script>
+    const test55 = () =>{
+        const menu = {
+            name : "청국장",
+            price : 50_000,
+            ingredient : ['청국장', '소금', '파', '양파', '마늘'],
+            restaurant : {
+                name : "안동된장",
+                addr : "서울시 강남구 역삼동"
+            }, //객체배열 ? 
+            toString() { //toString을 왜 안에다 쓰는거지 ?
+                let str = "[";
+                for(let key in this){
+                    typeof this[key] !== 'function' && (str += `${key} == ${this[key]}`)
+                }                
+                str += "]"
+            },
+            toString(){
+                let str ="{"
+                Object.keys(this).forEach( (key,index,keys)=>{
+                  //  console.log ('key: ' + key)
+                    typeof this[key] !== 'function' && (str+= `${key} == ${this[key]} ${(index != keys.length - 2 ? ', ' : ' ')}` );
+                });
+                str += "}";
+                return str;
+
+            }
+
+        }
+        console.log ( menu.toString() )
+        console.log ( " restaurant : " + menu.restaurant.toString() )  
+        console.log ( "ingredient : " +  menu.ingredient.toString() )
+
+    }
+
+/*
+  toString(){
+                    let str = "{ "
+                    Object.keys(this).forEach((key, index, keys) => {
+                        console.log( '***key : ' + key)
+                        typeof this[key] !== 'function' && (str += `${key}=${this[key]}${(index != keys.length - 2 ? ', ' : ' ')}`);
+                    });
+                    str += "}";
+                    return str;
+                }
+      */      
+</script>
+
+
+<h2> 객체 </h2>
+<button onclick="test3();"> 실행 </button>
+<script>
+    /** 객체 구조분해할당 
+     * - 속성명 별로 옮겨담음 
+     */
+   const test3 = () => {  
+
+    const obj =  {
+        a : true,
+        b : '안녕',
+        c : 123
+    };
+
+    // const a = obj.a // 객체구조분해 할당전에는 이런식으로 하나씩 호출해야됨 
+    // console.log(  a ) 
+
+    const{a,b,c,d='없음'} = obj; // 아까배열과는달리 {} 이걸로 감싸야됨  
+    // const{a,c,d='없음'} = obj; // 필요없는거는 이런식으로 생략가능 
+
+    console.log (a);
+    console.log (b);
+    console.log (c);
+    console.log (d);
+    // 변수명 = 속성명 같다는 전제하에 ? 만들수있따 
+
+    //속성명을 변경해 할당하려는 경우 
+    const {a:bool ,b:str ,c:num} = obj;
+    // a라는 속성을 찾아서  :을 기준으로 오른쪽에있는 bool 변수에 담아주세요 
+    console.log( bool );
+    console.log( str);
+    console.log( num  );
+
+    // ★중첩객체 
+    // const user = {
+    //     id : 'honggd',
+    //     name : {
+    //         firstName : '길동',
+    //         familyName : '홍',
+    //     },
+    //     sns : ['instagram', 'TikTok', 'twitter']
+    // };
+
+    const user = getUser('honggd'); // 객체 할당 다시 
+
+
+    const {id, name : {firstName, familyName, twitter}, sns : [mainSns, subSns] } = user;
+    //  sns 이런거는 이제 속성 참고를 한거고 실제 변수는  mainSns  , subSns 이거다 
+    console.log ( "*id : " +  id );
+    console.log ( "*firstName : " +  firstName );
+    console.log ( "*familyName : " +  familyName );
+    console.log ( "*mainSns : " +  mainSns );
+    console.log ( "*subSns : " +  subSns );
+    
+    printUserInfo(user); //함수생성(user객체를 던진다 ? )
+    console.log(' printUserId 호출할차례')
+  
+    printUserId(user);  
+    printUserName(user); 
+    printUserSns(user); 
+        
+
+
+   // console.log ( "name : " + name ) //name : [object Object] 
+   // console.log ( "sns : " +  sns )
+
+
+   // 나머지 파라미터    const{x,y, ...rest} = item; 
+   const item = { 
+        x : 'zzz',
+        y : 'ttt',
+        z : {
+            year : 2022, 
+            month : 12,
+            date : 2
+        }
+   };
+ 
+   const{x,y, ...rest} = item;
+   console.log (x);
+   console.log (y);
+   console.log (rest);
+
+} 
+
+///////////            printUserInfo             //////////////
+// const printUserInfo = ({id, name:{firstName, familyName}, sns:[mainSns, subSns]}) => {
+//     console.log( `id : ${id},  familyName: ${familyName}, firstName : ${firstName}, sns:${mainSns}, ${subSns}`); 
+// }
+
+const printUserId = ({id}) => {};
+const printUserName = ({name : {firstName, familyName} }) => {};
+const printUserSns = ({sns : {mainSns, subSns} }) => {};
+/////////////////////////
+const printUserInfo = ({id, name:{firstName, familyName}, sns:[mainSns, subSns]}) => {
+    console.log( `id : ${id},  familyName: ${familyName}, firstName : ${firstName}, sns:${mainSns}, ${subSns}`); 
+}
+
+/////////////////////////   getUer /////////////////////////////
+const getUser = (id) => {
+    return { 
+            id : 'honggd',
+            name : {
+                firstName : '길동',
+                familyName : '홍',
+            },
+            sns : ['instagram', 'TikTok', 'twitter']
+    }     
+
+} 
+// 이런식으로 반환값이 객체고 화살표 함수로 간결하게 줄이고 싶다며 소괄호를 밖에다가 한번더 감싸줘야됨 
+// const getUsers = (id) =>  ({ 
+//             id : 'honggd',
+//             name : {
+//                 firstName : '길동',
+//                 familyName : '홍',
+//             },
+//             sns : ['instagram', 'TikTok', 'twitter']
+// }); 
+
+</script>    
+
+</body>
+</html>

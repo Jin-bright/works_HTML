@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>  1. csv데이터를 다음과 같이 출력하세요. </h1>
+    홍길동,남,90,80,70,60|신사임당,여,88,100,50|전봉준,남,55,80,77 <br><br>
+    <button onclick="test1()"> 출력결과  </button><br>
+    홍길동(남) 평균 75점<br>
+    신사임당(여) 평균 79.3점<br>
+    전봉준(남) 평균 70.7점<br>
+    
+    <script>
+        const test1 = () => {
+            const str = '홍길동,남,90,80,70,60|신사임당,여,88,100,50|전봉준,남,55,80,77';
+  
+            const strList =  str.split('|'); // '홍길동,남,90,80,70,60  // 신사임당,여,88,100,50 ...
+            for( let i=0; i<strList.length; i++){
+                const [namei,geni,si,ssi,sssi,ssssi=0]=  strList[i].split(','); // 점수 어떻게 간단하게 구하지 ? 
+
+                let count = 0; 
+                if(  si != 0 ){
+                    count++
+                }
+                if(  ssi != 0 ){
+                    count++
+                }
+                if(  sssi != 0 ){
+                    count++
+                }
+                if(  ssssi != 0 ){
+                    count++
+                }
+                console.log ( namei+"("+geni+ ") 평균 "+ Math.round ((Number(si)+Number(ssi)+Number(sssi)+Number(ssssi))*10/count)/10  + "점"  ); 
+
+            }
+        }    
+    </script> <br><br><br><br><br>
+    
+<h1>2. 다음 객체를 반환하는 getKHInfo함수를 만들고, 호출한후에 특정 정보만출력.  </h1><br>
+<button onclick="test2()"> 출력결과 </button> <br>
+<br><br>
+출력결과:  (교육원명, url, 대표전화1개, 종로 지원의 주소)<br><br>
+교육원명 : KH정보교육원<br> 
+홈페이지 : https://iei.or.kr<br>
+전화번호 : 070-1234-1234<br>
+종로지원주소 : 서울특별시 중구 남대문로 120 대일빌딩<br><br><br>
+
+<script>
+  const getKHInfo = () => {
+    
+        const information = {
+            name : 'KH정보교육원',
+            url : 'https://iei.or.kr',
+            tel : ['070-1234-1234', '070-2345-2345'],
+            branches : {
+                '강남 지원' : {addr : '서울특별시 강남구 테헤란로 14길 6 남도빌딩'},
+                '종로 지원' : {addr : '서울특별시 중구 남대문로 120 대일빌딩'},
+                '당산 지원' : {addr : '서울특별시 영등포구 선유동2로 57 이레빌딩(구관)'}
+            }
+                        
+        }
+
+
+      const {name, url, tel:[tel1, tel2], branches:{ '종로 지원':{addr} } } = information; //구조분해할당 / 주소 ★
+
+let str = `교육원명 : ${name}
+홈페이지 :  ${url}
+전화번호 : ${tel1}
+종로지원주소 : ${addr}`
+
+         return str;
+
+      } 
+
+
+    const test2 = () => { 
+      getKHInfo();
+      console.log ( getKHInfo());
+    };
+
+  //  구조분해할당x
+  //  const getKHInfo = () => {
+  //       const information = {
+  //           name : 'KH정보교육원',
+  //           url : 'https://iei.or.kr',
+  //           tel : ['070-1234-1234', '070-2345-2345'],
+  //           branches : {
+  //               '강남 지원' : {addr : '서울특별시 강남구 테헤란로 14길 6 남도빌딩'},
+  //               '종로 지원' : {addr : '서울특별시 중구 남대문로 120 대일빌딩'},
+  //               '당산 지원' : {addr : '서울특별시 영등포구 선유동2로 57 이레빌딩(구관)'},
+  //           },
+  //           toString(){
+  //               let str = "교육원명 : " + information.name +"\n"
+  //                       + "홈페이지 : " + information.url+"\n"
+  //                       + "전화번호 : " + information.tel[0]+"\n"
+  //                       + "종로지원주소 : " + information.branches['종로 지원'].addr
+  //               return str;    
+  //           }
+                
+  //       }
+  //       return information;    
+  //  }
+
+  // const test2 = () => { 
+  //   getKHInfo();
+  //   console.log ( getKHInfo().toString() )
+  // }
+
+
+</script>
+
+<h1> 3. 다음 회원객체 정보에서 가족관계를 다음과 같이 출력 <br> (반복문을 통해 배열 순회하면서 한명씩 출력)</h1>
+<button onclick="test3()"> 출력결과 </button><br>
+    이름 : 홍길동, 아빠 : 홍석천, 엄마 : 홍진경, 형제자매 : 홍수아<br>
+    이름 : 신사임당, 아빠 : 신동엽, 엄마 : 고두심, 형제자매 : 신하균 <br>
+    이름 : 이순신, 아빠 : 이경영, 엄마 : 이영자, 형제자매 : 이승환,아이유 <br>
+
+<script>
+  const test3 = () => {
+    const persons = [  
+      {
+        name : '홍길동',
+        family : {
+          father : '홍석천',
+          mother : '홍진경',
+          sister : '홍수아',
+        }, 
+        age : 35
+      },
+      {
+        name : '신사임당',
+        family : {
+          father : '신동엽',
+          mother : '고두심',
+          brother : '신하균',
+        }, 
+        age : 25
+      },
+        {
+        name : '이순신',
+        family : {
+          father : '이경영',
+          mother : '이영자',
+          brother : '이승환',
+          sister : '아이유',
+        }, 
+        age : 33
+      }
+    ]
+
+    for(let i=0; i< persons.length; i++){
+      const {name, family:{father, mother, sister="", brother=""} } = persons[i] // 구조분해할당
+      
+      let sib = "";
+      if( brother != "" && sister != "" ){
+        sib = `${brother}, ${sister}`;
+      }
+      else {
+        sib =`${brother}${sister}`;
+      }
+
+        console.log ( `이름 : ${name}, 아빠 : ${father}, 엄마 : ${mother}, 형제자매 : ${sib}` )
+    }
+  } 
+    
+</script>
+
+
+</body>
+</html>
