@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@실습문제 - 상속 - 메뉴</title>
+  <style>
+  table {border:1px solid black; border-collapse:collapse; margin: 10px 0;}
+  th, td {border:1px solid black; text-align:center; padding: 5px;}
+  th:nth-of-type(2) {width: 200px;}
+  </style>
+</head>
+<body onload="init();">
+  <h1>@실습문제 - 상속 - 메뉴</h1>
+  <h2>메뉴</h2>
+  <table id="menu-food">
+    <caption><h3>식사메뉴</h3></caption>
+    <thead>
+      <tr>
+          <th>번호</th>
+          <th>메뉴명</th>
+          <th>가격</th>
+          <th>타입</th>
+      </tr>
+  </thead>
+  <tbody></tbody>
+  </table>
+  
+  <table id="menu-drink">
+    <caption><h3>음료메뉴</h3></caption>
+    <thead>
+      <tr>
+          <th>번호</th>
+          <th>메뉴명</th>
+          <th>가격</th>
+          <th>성인인증</th><!-- input:checkbox로 처리할 것-->
+      </tr>
+      
+  </thead>
+  <tbody></tbody>
+  </table>
+
+  <script>
+  /**
+   * 다음 데이터를 처리하기 위한 class를 작성하세요
+   * (Food와 Drink의 부모클래스 Menu 설계할 것)
+   * 
+   * Food - id:string, name:string, price:number, type:string
+   * Drink - id:string, name:string, price:number, adultOnly:boolean
+   */
+
+  class menu { // 부모클래스 menu 
+    
+    constructor(id, name, price){
+      this.id = id;
+      this.name = name;
+      this.price = price;
+    }
+
+  } 
+
+  class Food extends menu { // food 클래스 
+    constructor(id, name, price, type){
+      super(id, name, price);
+      this.type = type;
+    }
+  } 
+
+  class Drink extends menu { // Drink 클래스 
+    constructor(id, name, price, adultOnly){
+      super(id, name, price);
+      this.adultOnly = adultOnly;
+    }
+  } 
+
+
+  
+
+  const init = () => {
+
+    const menuData = {
+    foodMenu : [
+            new Food('food101','잡채밥', 8000, '밥'),
+            new Food('food102','김치찌게', 7500, '밥'),
+            new Food('food103','로제파스타', 9000, '면'),
+            new Food('food104','돌솥비빔밥', 8000, '밥'),
+            new Food('food105','짬뽕', 9000, '면'),
+    ],
+    drinkMenu : [
+      new Drink('drink201','생수', 1000, false),
+      new Drink('drink202','오렌지쥬스', 2500, false),
+      new Drink('drink203','사이다', 2000, false),
+      new Drink('drink204','생맥주 500cc', 4000, true),
+      new Drink('drink205','소주', 4000, true),
+    ]
+  };
+
+    const tbody =  document.querySelector("#menu-food tbody")
+    for(let i =0; i<menuData.foodMenu.length; i++){
+
+      tbody.innerHTML += `<tr>
+                       <td>${menuData.foodMenu[i].id}</td>
+                       <td>${menuData.foodMenu[i].name}</td>
+                       <td>${menuData.foodMenu[i].price}</td>
+                       <td>${menuData.foodMenu[i].type}</td>
+                    </tr>`;
+    };
+
+
+    const Drinktbody =  document.querySelector("#menu-drink tbody")
+   
+    for(let i =0; i<menuData.drinkMenu.length; i++){
+    const adult = menuData.drinkMenu[i].adultOnly ? "checked" : "";
+
+      Drinktbody.innerHTML += `<tr>
+                       <td>${menuData.drinkMenu[i].id}</td>
+                       <td>${menuData.drinkMenu[i].name}</td>
+                       <td>${menuData.drinkMenu[i].price}</td>
+                       <td><input type="checkbox" ${adult} ></td>
+                    </tr>`;
+    };
+
+
+
+
+  }
+    
+/*
+ const  menuData를 밖에서 선언하고 가져와서 쓸려면 
+=>  const Data_foodMenu = menuData.foodMenu; 이렇게 가져오기 
+
+=> forEach로 넣을려면 
+
+    Data_foodMenu.forEach((food) =>{
+        tbody.innerHTML += 
+        `<tr>
+            <td>${food.id}</td>
+            <td>${food.name}</td>
+            <td>${food.price}</td>
+            <td>${food.type}</td>
+        </tr>`
+        
+*/
+  </script>
+
+
+
+</body>
+</html>
